@@ -31,44 +31,48 @@ and open the template in the editor.
         include '../connect_db.php';
         include '../function.php';
         $error = false;
-        if (isset($_GET['action']) && $_GET['action'] == 'reg') {
-            if (isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])) {
+        if (isset($_GET['action']) && $_GET['action'] == 'reg') 
+        {
+            if (isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])) 
+            {
                 $fullname = $_POST['fullname'];
-                $birthday = $_POST['birthday'];
-                $check = validateDateTime($birthday);
-                if ($check) {
-                    $birthday = strtotime($birthday);
-                    $result = mysqli_query($con, "INSERT INTO `user` (`fullname`,`username`, `password`, `birthday`, `status`, `created_time`, `last_updated`) VALUES ('" . $_POST['fullname'] . "', '" . $_POST['username'] . "', MD5('" . $_POST['password'] . "'), '" . $birthday . "', 1, " . time() . ", '" . time() . "');");
-                    if (!$result) {
-                        if (strpos(mysqli_error($con), "Duplicate entry") !== FALSE) {
+                $phone = $_POST['phone'];
+                    $result = mysqli_query($con, "INSERT INTO `user` (`fullname`,`username`, `password`, `phone`, `status`, `created_time`, `last_updated`) 
+                                            VALUES ('" . $_POST['fullname'] . "', '" . $_POST['username'] . "', MD5('" . $_POST['password'] . "'), '" . $phone . "', 1, " . time() . ", '" . time() . "');");
+                    if (!$result) 
+                    {
+                        if (strpos(mysqli_error($con), "Duplicate entry") !== FALSE) 
+                        {
                             $error = "Tài khoản đã tồn tại. Bạn vui lòng chọn tài khoản khác.";
                         }
                     }
                     mysqli_close($con);
-                } else {
-                    $error = "Ngày tháng nhập chưa chính xác";
-                }
-                if ($error !== false) {
-                    ?>
+                if ($error !== false) 
+                { ?>
                     <div id="error-notify" class="box-content">
                         <h1>Thông báo</h1>
                         <h4><?= $error ?></h4>
                         <a href="./register.php">Quay lại</a>
                     </div>
-                <?php } else { ?>
+          <?php } else 
+                    { ?> 
                     <div id="edit-notify" class="box-content">
                         <h1><?= ($error !== false) ? $error : "Đăng ký tài khoản thành công" ?></h1>
-                        <a href="./login.php">Mời bạn đăng nhập</a>
+                        <a href="./index.php">Mời bạn đăng nhập</a>
                     </div>
-                <?php } ?>
-            <?php } else { ?>
+              <?php } ?>
+            <?php }
+            else 
+            { ?>
                 <div id="edit-notify" class="box-content">
                     <h1>Vui lòng nhập đủ thông tin để đăng ký tài khoản</h1>
                     <a href="./register.php">Quay lại đăng ký</a>
                 </div>
                 <?php
             }
-        } else {
+        } 
+        else 
+        {
             ?>
             <div id="user_register" class="box-content">
                 <h1>Đăng ký tài khoản</h1>
@@ -79,8 +83,8 @@ and open the template in the editor.
                     <input type="password" name="password" value="" /></br>
                     <label>Họ tên</label></br>
                     <input type="text" name="fullname" value="" /><br/>
-                    <label>Ngày sinh (DD-MM-YYYY)</label></br>
-                    <input type="text" name="birthday" value="" /><br/>
+                    <label>Số điện thoại</label></br>
+                    <input type="text" name="phone" value="" /><br/>
                     </br>
                     </br>
                     <input type="submit" value="Đăng ký"/>

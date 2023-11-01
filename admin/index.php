@@ -10,20 +10,55 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            .box-content{
-                margin: 0 auto;
-                width: 800px;
-                border: 1px solid #ccc;
-                text-align: center;
-                padding: 20px;
-            }
-            #user_login form{
-                width: 200px;
-                margin: 40px auto;
-            }
-            #user_login form input{
-                margin: 5px 0;
-            }
+            
+                .box-content {
+                    position: absolute;
+                    top: 42%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 400px;
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    text-align: center;
+                    background-color: #F0FFF0;
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);/* đổ bóng*/
+                    border-radius: 20px;
+                }
+                #user_login form 
+                {
+                    width: 100%;
+                    margin: 20px auto;
+                    width: 300px;
+                }
+
+                #user_login form input 
+                {
+                    margin: 10px 0;
+                    padding: 10px;
+                    width: 100%; 
+                    border-radius: 7px;
+                }
+                /*.login-button 
+                {
+                    background-color: green ;
+                    padding: 10px;
+                    color: white;
+                }*/
+                .input-password /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+                {
+                position: relative;
+                }
+                .an-hien-password /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+                {
+                    position: absolute; 
+                    top: 50%;
+                    right: 5px;
+                    transform: translateY(-50%);
+                }
+                #show-hide {
+                    cursor: pointer;
+                        }
+
         </style>
     </head>
     <body>
@@ -32,7 +67,7 @@ and open the template in the editor.
         include '../connect_db.php';
         $error = false;
         if (isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])) {
-            $result = mysqli_query($con, "Select `id`,`username`,`fullname`,`birthday` from `user` WHERE (`username` ='" . $_POST['username'] . "' AND `password` = md5('" . $_POST['password'] . "'))");
+            $result = mysqli_query($con, "Select `id`,`username`,`fullname`,`phone` from `user` WHERE (`username` ='" . $_POST['username'] . "' AND `password` = md5('" . $_POST['password'] . "'))");
             if (!$result) {
                 $error = mysqli_error($con);
             } else {
@@ -43,9 +78,9 @@ and open the template in the editor.
             if ($error !== false || $result->num_rows == 0) {
                 ?>
                 <div id="login-notify" class="box-content">
-                    <h1>Thông báo</h1>
-                    <h4><?= !empty($error) ? $error : "Thông tin đăng nhập không chính xác" ?></h4>
-                    <a href="./index.php">Quay lại</a>
+                    <h1 style="color: green; font-size: 24px;">Thông báo</h1>
+                    <h4 style="color: black; font-size: 16px;"><?= !empty($error) ? $error : "Thông tin đăng nhập không chính xác!!" ?></h4>
+                    <a href="./index.php" style="text-decoration: none; background-color: green; color: white; padding: 8px 13px; margin: 10px 0;border-radius: 10px; ">Quay lại</a>
                 </div>
                 <?php
                 exit;
@@ -56,25 +91,39 @@ and open the template in the editor.
             <div id="user_login" class="box-content">
                 <h1>Đăng nhập tài khoản</h1>
                 <form action="./index.php" method="Post" autocomplete="off">
-                    <label>Username</label></br>
-                    <input type="text" name="username" value="" /><br/>
-                    <label>Password</label></br>
-                    <input type="password" name="password" value="" /></br>
-                    <br>
-                    <input type="submit" value="Đăng nhập" /> <br>
-                    <a href="./register.php">Đăng ký</a>
+                    <label style="font-size: 20px;">Username</label></br>
+                    <input type="text" name="username" value="" placeholder="Nhập tài khoản"/><br/>
+                    <label style="font-size: 20px;" for="password">Password</label><br>
+                    <div class="input-password">
+                    <input type="password" name="password" id="password" placeholder="Nhập mật khẩu">
+                    <span class="an-hien-password" id="show-hide" onclick="showPassword()">🙈</span>
+                    </div>
+                    <input type="submit" value="Đăng nhập" style="text-decoration: none; background-color: green; color: white; padding: 8px; margin: 20px 6px; "> 
+                    <a href="./register.php" style="text-decoration: none;">Đăng ký</a>
                 </form>
             </div>
             <?php
         } else {
             $currentUser = $_SESSION['current_user'];
-            ?>
-            <div id="login-notify" class="box-content">
-                Xin chào <?= $currentUser['fullname'] ?><br/>
-                <a href="./product_listing.php">Quản lý sản phẩm</a><br/>
-                <a href="./edit.php">Đổi mật khẩu</a><br/>
-                <a href="./logout.php">Đăng xuất</a>
-            </div>
-        <?php } ?>
+            header("Location: product_listing.php");
+            exit(); 
+             } ?>
+            <script>
+                function showPassword() 
+                {
+                    var passwordField = document.getElementById("password");
+                    var showHideIcon = document.getElementById("show-hide");
+                    
+                    if (passwordField.type === "password") 
+                            {
+                                passwordField.type = "text"; // Hiển thị mật khẩu
+                                showHideIcon.textContent = "🙉"; // Biểu tượng khi hiên mật khẩu
+                            } else {
+                                passwordField.type = "password"; // Ẩn mật khẩu
+                                showHideIcon.textContent = "🙈"; // Biểu tượng khi ẩn mật khẩu
+                            }
+                }
+            </script>
+
     </body>
 </html>

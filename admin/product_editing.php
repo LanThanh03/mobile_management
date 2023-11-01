@@ -113,7 +113,6 @@ if (!empty($_SESSION['current_user'])) {
                          <?php 
                          if(!empty($product)){?>
                             <option selected> <?= $product['category'] ?></option>
-                            option>--Chọn danh mục--</option>
                             <option>Samsung</option>
                             <option>Iphone</option>
                             <option>Xiaomi</option>

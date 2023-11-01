@@ -7,7 +7,7 @@ if (!empty($_SESSION['current_user'])) {
         <div id="content-box">
             <?php
             if (isset($_GET['action']) && ($_GET['action'] == 'add' || $_GET['action'] == 'edit')) {
-                if (isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['price']) && !empty($_POST['price'])) {
+                if (isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['price']) && !empty($_POST['price']) && isset($_POST['category']) && !empty($_POST['category'])) {
                     $galleryImages = array();
                     if (empty($_POST['name'])) {
                         $error = "Bạn phải nhập tên sản phẩm";
@@ -42,9 +42,11 @@ if (!empty($_SESSION['current_user'])) {
                     }
                     if (!isset($error)) {
                         if ($_GET['action'] == 'edit' && !empty($_GET['id'])) { //Cập nhật lại sản phẩm
-                            $result = mysqli_query($con, "UPDATE `product` SET `name` = '" . $_POST['name'] . "',`image` =  '" . $image . "', `price` = " . str_replace('.', '', $_POST['price']) . ", `content` = '" . $_POST['content'] . "', `last_updated` = " . time() . " WHERE `product`.`id` = " . $_GET['id']);
+                            $sql1 = "UPDATE `product` SET `name` = '" . $_POST['name'] . "',`image` =  '" . $image . "', `price` = " . str_replace('.', '', $_POST['price']) . ", `quantity` = '" . $_POST['quantity'] . "',`content` = '" . $_POST['content'] . "' ,`last_updated` = " . time() . ", `category`='" . $_POST['category'] . "' WHERE `product`.`id` = " . $_GET['id'] ." " ;
+                            $result = mysqli_query($con,$sql1);
                         } else { //Thêm sản phẩm
-                            $result = mysqli_query($con, "INSERT INTO `product` (`id`, `name`, `image`, `price`, `content`, `created_time`, `last_updated`) VALUES (NULL, '" . $_POST['name'] . "','" . $image . "', " . str_replace('.', '', $_POST['price']) . ", '" . $_POST['content'] . "', " . time() . ", " . time() . ");");
+                            $sql = "INSERT INTO `product` (`id`, `name`, `image`, `price`, `quantity`, `content`, `created_time`, `last_updated`, `category`) VALUES(NULL, '" . $_POST['name'] . "','" . $image . "', " . str_replace('.', '', $_POST['price']) . ", '" . $_POST['quantity'] . "','" . $_POST['content'] . "', " . time() . ", " . time() . ",'" . $_POST['category'] . "')";
+                            $result = mysqli_query($con, $sql);
                         }
                         if (!$result) { //Nếu có lỗi xảy ra
                             $error = "Có lỗi xảy ra trong quá trình thực hiện.";
@@ -98,6 +100,35 @@ if (!empty($_SESSION['current_user'])) {
                     <div class="wrap-field">
                         <label>Giá sản phẩm: </label>
                         <input type="text" name="price" value="<?= (!empty($product) ? number_format($product['price'], 0, ",", ".") : "") ?>" />
+                        <div class="clear-both"></div>
+                    </div>
+                     <div class="wrap-field">
+                        <label>Số Lượng: </label>
+                        <input type="text" name="quantity" value="<?= (!empty($product) ? $product['quantity']: "") ?>" />
+                        <div class="clear-both"></div>
+                    </div>
+                    <div class="wrap-field">
+                        <label>Danh mục: </label>
+                        <select  class ="thuonghieu" name ="category"/>
+                         <?php 
+                         if(!empty($product)){?>
+                            <option selected> <?= $product['category'] ?></option>
+                            option>--Chọn danh mục--</option>
+                            <option>Samsung</option>
+                            <option>Iphone</option>
+                            <option>Xiaomi</option>
+                            <option>Oppo</option>
+                            <?php
+                        }
+                       else {?>
+                            <option>--Chọn danh mục--</option>
+                            <option>Samsung</option>
+                            <option>Iphone</option>
+                            <option>Xiaomi</option>
+                            <option>Oppo</option>
+                        <?php }?>
+                        </select>
+                     
                         <div class="clear-both"></div>
                     </div>
                     <div class="wrap-field">

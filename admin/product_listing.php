@@ -81,6 +81,7 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
                 </li>
                 <?php
                 while ($row = mysqli_fetch_array($products)) {
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
                     ?>
                     <li>
                         <div class="listing-prop listing-id"><?= $row['id'] ?></div>

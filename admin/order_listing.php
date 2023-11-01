@@ -1,27 +1,20 @@
 <?php
 include 'header.php';
-$config_name = "product";
-$config_title = "sản phẩm";
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 if (!empty($_SESSION['current_user'])) {
     if(!empty($_GET['action']) && $_GET['action'] == 'search' && !empty($_POST)){
-        $_SESSION[$config_name.'_filter'] = $_POST;
-        header('Location: '.$config_name.'_listing.php');exit;
+        $_SESSION['order_filter'] = $_POST;
+        header('Location: order_listing.php');exit;
     }
-    if(!empty($_SESSION[$config_name.'filter'])){
+    if(!empty($_SESSION['order_filter'])){
         $where = "";
-        foreach ($_SESSION[$config_name.'filter'] as $field => $value) {
+        foreach ($_SESSION['order_filter'] as $field => $value) {
             if(!empty($value)){
-                switch ($field) {
-                    case 'name':
-                    $where .= (!empty($where))? " AND "."`".$field."` LIKE '%".$value."%'" : "`".$field."` LIKE '%".$value."%'";
-                    break;
-                    default:
-                    $where .= (!empty($where))? " AND "."`".$field."` = ".$value."": "`".$field."` = ".$value."";
-                    break;
-                }
+                $where .= (!empty($where))? " AND "."`".$field."` = ".$value."": "`".$field."` = ".$value.""; 
             }
         }
-        extract($_SESSION[$config_name.'filter']);
+        extract($_SESSION['order_filter']);
+        
     }
     $item_per_page = (!empty($_GET['per_page'])) ? $_GET['per_page'] : 10;
     $current_page = (!empty($_GET['page'])) ? $_GET['page'] : 1;
@@ -41,25 +34,24 @@ if (!empty($_SESSION['current_user'])) {
     mysqli_close($con);
     ?>
     <div class="main-content">
-        <h1>Danh sách <?= $config_title ?></h1>
+        <h1>Danh sách đơn hàng</h1>
         <div class="listing-items">
-            <div class="buttons">
-                <a href="./<?= $config_name ?>_editing.php">Thêm <?= $config_title ?></a>
-            </div>
             <div class="listing-search">
-                <form id="<?= $config_name ?>-search-form" action="<?= $config_name ?>_listing.php?action=search" method="POST">
+                <form id="order-search-form" action="order_listing.php?action=search" method="POST">
                     <fieldset>
-                        <legend>Tìm kiếm <?= $config_title ?>:</legend>
+                        <legend>Tìm kiếm đơn hàng:</legend>
                         ID: <input type="text" name="id" value="<?= !empty($id) ? $id : "" ?>" />
-                        Tên <?= $config_title ?>: <input type="text" name="name" value="<?= !empty($name) ? $name : "" ?>" />
-                        <input type="submit" value="Tìm" />
+                        Số điện thoại: <input type="text" name="phone" value="<?= !empty($phone) ? $phone : "" ?>" />
+                        <input type="submit" value="Tìm kiếm" />
                     </fieldset>
                 </form>
             </div>
-            <div class="total-items">
-                <?php /*
-                  <span>Có tất cả <strong><?=$totalRecords?></strong> <?=$config_title?> trên <strong><?=$totalPages?></strong> trang</span> */ ?>
-            </div>
+            <?php 
+            if (isset ($_SESSION['product_filter']) && ($_SESSION['order_filter']["id"] != "" || $_SESSION['order_filter']["phone"] != "")){?>
+                <div class="total-items">
+                    <span>Tìm thấy <strong><?=$totalRecords?></strong> đơn hàng</span>
+                </div>
+            <?php } ?>
             <ul>
                 <li class="listing-item-heading">
                     <div class="listing-prop listing-id">ID</div>

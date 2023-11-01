@@ -14,6 +14,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        //Thêm nút tăng sl sp// dòng 128 class: product-quantity <input
         include './connect_db.php';
         if (!isset($_SESSION["cart"])) {
             $_SESSION["cart"] = array();
@@ -25,7 +26,7 @@ and open the template in the editor.
             function update_cart($add = false) {
                 foreach ($_POST['quantity'] as $id => $quantity) {
                     if ($quantity == 0) {
-                        unset($_SESSION["cart"][$id]);
+                        unset($_SESSION["cart"][$id]); //xóa sp khi sl =0
                     } else {
                         if ($add) {
                             $_SESSION["cart"][$id] += $quantity;
@@ -124,7 +125,7 @@ and open the template in the editor.
                                     <td class="product-name"><?= $row['name'] ?></td>
                                     <td class="product-img"><img src="<?= $row['image'] ?>" /></td>
                                     <td class="product-price"><?= number_format($row['price'], 0, ",", ".") ?></td>
-                                    <td class="product-quantity"><input type="text" value="<?= $_SESSION["cart"][$row['id']] ?>" name="quantity[<?= $row['id'] ?>]" /></td>
+                                    <td class="product-quantity"><input type="number" min="1" class="form-control text -center" value="<?= $_SESSION["cart"][$row['id']] ?>" name="quantity[<?= $row['id'] ?>]" /></td>
                                     <td class="total-money"><?= number_format($row['price'] * $_SESSION["cart"][$row['id']], 0, ",", ".") ?></td>
                                     <td class="product-delete"><a href="cart.php?action=delete&id=<?= $row['id'] ?>">Xóa</a></td>
                                 </tr>

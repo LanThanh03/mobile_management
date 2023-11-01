@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+       
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
         <title>Phone Store</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+            
             body{
                 font-family: arial;
             }
@@ -16,11 +22,12 @@
                 text-align: center;
             }
             .product-items{ 
-                border: 1px solid #ccc;
+               
                 padding: 20px;
             }
             .product-item{
                 float: left;
+                height: 400px;
                 width: 18%;
                 margin: 1%;
                 padding: 10px;
@@ -68,6 +75,7 @@
             }
             a{
                 text-decoration: none;
+               
             }
         /*css phan trang*/
             #pagination {
@@ -87,21 +95,67 @@
                 background: #000;
                 color: #FFF;
             }
+         
+            /*css icon và tìm kiem*/
+            .cart-icon{ 
+                font-size:38px;
+                padding-right: 20px;
+                padding-left:10px;
+            }
+            
+           #wrapper-product{
+               border:1px solid #ccc;
+
+           }
+           #product-search{
+               margin:0 40px;
+               padding:10px;
+               padding-bottom:10px;
+               padding-top:10px;
+                box-sizing: border-box;
+               border: 1px solid #ccc
+           }
         </style>
     </head>
     <body>
         <?php
+        
+        //search 
+        $search = isset($_GET['name']) ? $_GET['name'] : "";
+               
         include './connect_db.php';
         $item_per_page = !empty($_GET['per_page'])?$_GET['per_page']:10;
         $current_page = !empty($_GET['page'])?$_GET['page']:1; //Trang hiện tại
         $offset = ($current_page - 1) * $item_per_page;
-        $products = mysqli_query($con, "SELECT * FROM `product` ORDER BY `id` ASC  LIMIT " . $item_per_page . " OFFSET " . $offset);
-        $totalRecords = mysqli_query($con, "SELECT * FROM `product`");
+        
+        if($search){
+             $products = mysqli_query($con, "SELECT * FROM `product` WHERE `name` LIKE '%".$search."%' ORDER BY `id` ASC  LIMIT " . $item_per_page . " OFFSET " . $offset);
+             $totalRecords = mysqli_query($con, "SELECT * FROM `product` WHERE `name` LIKE '%".$search."%'");
+         } else {
+             $products = mysqli_query($con, "SELECT * FROM `product` ORDER BY `id` ASC  LIMIT " . $item_per_page . " OFFSET " . $offset);
+             $totalRecords = mysqli_query($con, "SELECT * FROM `product`");
+         }
+
         $totalRecords = $totalRecords->num_rows;
         $totalPages = ceil($totalRecords / $item_per_page);
         ?>
-        <div class="container">
+        <div id ="wrapper-product" class="container">
             <h1>Danh sách sản phẩm</h1>
+        <table >
+  <!--product search -->  
+            <td width="50%">
+            <form id="product-search"  method="GET">
+                        <label>Tìm kiếm sản phẩm:</label>
+                        <input type="text"  value="<?=isset($_GET['name']) ? $_GET['name'] : ""?>" name="name" />
+                        <input type="submit" value="Tìm kiếm" />
+            </form>
+            </td>
+  <!-- Tạo icon giỏ hàng -->
+            <td style=" text-align: right;">Giỏ hàng của bạn:  </td>
+            <td class="cart-icon" > 
+                <a href='cart.php' ><i class="fa fa-shopping-cart" ></i><a> </td>
+        </table>
+
             <div class="product-items">
                 <?php
                 while ($row = mysqli_fetch_array($products)) {
@@ -116,6 +170,7 @@
                     </div>
                 <?php } ?>
                 <div class="clear-both"></div>
+
                 <?php
                 include './pagination.php'; //chức năng phân trang
                 ?>

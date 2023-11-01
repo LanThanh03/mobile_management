@@ -165,6 +165,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        //Thêm nút tăng sl sp //sửa code ở phần form dòng input đầu tiên
         include './connect_db.php';
         $result = mysqli_query($con, "SELECT * FROM `product` WHERE `id` = ".$_GET['id']);
         $product = mysqli_fetch_assoc($result);  
@@ -181,7 +182,7 @@ and open the template in the editor.
                     <h1><?=$product['name']?></h1>
                     <label>Giá: </label><span class="product-price"><?= number_format($product['price'], 0, ",", ".") ?> VND</span><br/>
                     <form id="add-cart" action="cart.php?action=add" method="POST">
-                        <input type="text" value="1" name="quantity[<?= $product['id'] ?>]" size="2" /><br/>
+                        <input type="number" min="1" class="form-control text-center" value="1" name="quantity[<?= $product['id'] ?>]" size="2" /><br/>
                         <input type="submit" value="Mua sản phẩm" />
                     </form>
                     <?php if(!empty($product['images'])){ ?>

@@ -1,126 +1,80 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>Phone Store</title>
+        <title>Admin</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            body{
-                font-family: arial;
-            }
-            .container{
-                width: 1200px;
+            .box-content{
                 margin: 0 auto;
-            }
-            h1{
-                text-align: center;
-            }
-            .product-items{ 
+                width: 800px;
                 border: 1px solid #ccc;
+                text-align: center;
                 padding: 20px;
             }
-            .product-item{
-                float: left;
-                width: 18%;
-                margin: 1%;
-                padding: 10px;
-                box-sizing: border-box;
-                border: 1px solid #ccc;
-                line-height: 26px;
+            #user_login form{
+                width: 200px;
+                margin: 40px auto;
             }
-            .product-item label{
-                font-weight: bold;
-            }
-            .product-item p{
-                /* margin: 0; */
-                /* line-height: 26px; */
-                max-height: 50px;
-                overflow: hidden;
-            }
-            .product-price{
-                color: red;
-                font-weight: bold;
-            }
-            .product-img{
-                padding: 5px;
-                border: 1px solid #ccc;
-                margin-bottom: 5px;
-            }
-            .product-item img{
-                max-width: 100%;
-            }
-            .product-item ul{
-                margin: 0;
-                padding: 0;
-                border-right: 1px solid #ccc;
-            } 
-            .product-item ul li{
-                float: left;
-                width: 33.3333%;
-                list-style: none;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-right: 0;
-                box-sizing: border-box;
-            }
-            .clear-both{
-                clear: both;
-            }
-            a{
-                text-decoration: none;
-            }
-        /*css phan trang*/
-            #pagination {
-        text-align: center;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-            .page-item{
-                border: 1px solid #ccc;
-                padding: 5px 9px;
-                color: #000;
-            }
-            .current-page{
-                background: #000;
-                color: #FFF;
+            #user_login form input{
+                margin: 5px 0;
             }
         </style>
     </head>
     <body>
         <?php
-        include './connect_db.php';
-        $item_per_page = !empty($_GET['per_page'])?$_GET['per_page']:10;
-        $current_page = !empty($_GET['page'])?$_GET['page']:1; //Trang hiện tại
-        $offset = ($current_page - 1) * $item_per_page;
-        $products = mysqli_query($con, "SELECT * FROM `product` ORDER BY `id` ASC  LIMIT " . $item_per_page . " OFFSET " . $offset);
-        $totalRecords = mysqli_query($con, "SELECT * FROM `product`");
-        $totalRecords = $totalRecords->num_rows;
-        $totalPages = ceil($totalRecords / $item_per_page);
-        ?>
-        <div class="container">
-            <h1>Danh sách sản phẩm</h1>
-            <div class="product-items">
-                <?php
-                while ($row = mysqli_fetch_array($products)) {
-                    ?>
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="detail.php?id=<?= $row['id'] ?>"><img src="<?= $row['image'] ?>" title="<?= $row['name'] ?>" /></a>
-                        </div>
-                        <strong><a href="detail.php?id=<?= $row['id'] ?>"><?= $row['name'] ?></a></strong><br/>
-                        <label>Giá: </label><span class="product-price"><?= number_format($row['price'], 0, ",", ".") ?> đ</span><br/>
-                        <p><?= $row['content'] ?></p>
-                    </div>
-                <?php } ?>
-                <div class="clear-both"></div>
-                <?php
-                include './pagination.php'; //chức năng phân trang
+        session_start();
+        include '../connect_db.php';
+        $error = false;
+        if (isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password'])) {
+            $result = mysqli_query($con, "Select `id`,`username`,`fullname`,`phone`,`role` from `user` WHERE (`username` ='" . $_POST['username'] . "' AND `password` = md5('" . $_POST['password'] . "'))");
+            if (!$result) {
+                $error = mysqli_error($con);
+            } else {
+                $user = mysqli_fetch_assoc($result);
+                $_SESSION['current_user'] = $user;
+            }
+            mysqli_close($con);
+            if ($error !== false || $result->num_rows == 0) {
                 ?>
-                <div class="clear-both"></div>
+                <div id="login-notify" class="box-content">
+                    <h1>Thông báo</h1>
+                    <h4><?= !empty($error) ? $error : "Thông tin đăng nhập không chính xác" ?></h4>
+                    <a href="./index.php">Quay lại</a>
+                </div>
+                <?php
+                exit;
+            }
+            ?>
+        <?php } ?>
+        <?php if (empty($_SESSION['current_user'])) { ?>
+            <div id="user_login" class="box-content">
+                <h1>Đăng nhập tài khoản</h1>
+                <form action="./index.php" method="Post" autocomplete="off">
+                    <label>Username</label></br>
+                    <input type="text" name="username" value="" /><br/>
+                    <label>Password</label></br>
+                    <input type="password" name="password" value="" /></br>
+                    <br>
+                    <input type="submit" value="Đăng nhập" /> <br>
+                    <a href="./register.php">Đăng ký</a>
+                </form>
             </div>
-        </div>
+            <?php
+        } else {
+            $currentUser = $_SESSION['current_user'];
+            ?>
+            <div id="login-notify" class="box-content">
+                Xin chào <?= $currentUser['fullname'] ?><br/>
+                <a href="./product_listing.php">Quản lý sản phẩm</a><br/>
+                <a href="./edit.php">Đổi mật khẩu</a><br/>
+                <a href="./logout.php">Đăng xuất</a>
+            </div>
+        <?php } ?>
     </body>
 </html>

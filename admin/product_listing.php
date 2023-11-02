@@ -53,7 +53,7 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
                 <form id="product-search-form" action="product_listing.php?action=search" method="POST">
                     <fieldset>
                         <legend>Tìm kiếm sản phẩm:</legend>
-                        ID: <input type="text" name="id" value="<?=!empty($id)?$id:""?>" />
+                        ID: <input type="number" name="id" value="<?=!empty($id)?$id:""?>" />
                         Tên sản phẩm: <input type="text" name="name" value="<?=!empty($name)?$name:""?>" />
                         <input type="submit" value="Tìm kiếm" />
                     </fieldset>

@@ -40,8 +40,8 @@ if (!empty($_SESSION['current_user'])) {
                 <form id="order-search-form" action="order_listing.php?action=search" method="POST">
                     <fieldset>
                         <legend>Tìm kiếm đơn hàng:</legend>
-                        ID: <input type="text" name="id" value="<?= !empty($id) ? $id : "" ?>" />
-                        Số điện thoại: <input type="text" name="phone" value="<?= !empty($phone) ? $phone : "" ?>" />
+                        ID: <input type="number" name="id" value="<?= !empty($id) ? $id : "" ?>" />
+                        Số điện thoại: <input type="number" name="phone" value="<?= !empty($phone) ? $phone : "" ?>" />
                         <input type="submit" value="Tìm kiếm" />
                     </fieldset>
                 </form>

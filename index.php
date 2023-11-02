@@ -1,8 +1,12 @@
-<!-- test branch -->
 <!DOCTYPE html>
-<html> 
+<html>
     <head>
         <title>Phone Store</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/style.css" >
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -88,9 +92,54 @@
                 background: #000;
                 color: #FFF;
             }
+            .tk input{
+                height: 40px;
+                border-radius: 5px;
+                padding-left: 5px;
+            
+            }
+            
         </style>
     </head>
     <body>
+        <nav>
+            <ul>
+                <form action = 'find.php' method = 'post' class = 'tk'><input type = 'text' name  = 'ht' placeholder = "Tìm sản phẩm" style = "margin-left:1000px; width: 300px;">
+                <input type = 'submit' value = 'Tìm' style = "width: 80px; border: none; margin-left: 10px;">
+                </form>
+                <li><a href = "cart.php"><button><i class = "fa fa-shopping-cart"></i>Giỏ hàng</button></a></li>
+                <li><a href = "login.php"><button>Đăng nhập</button></a></li>
+                <li><a href = "register.php"><button>Đăng ký</button></a></li>
+        </ul>
+        </nav>
+        
+        <section class = "menu-bar">
+            <div class = "menu-bar-content">
+                <ul>
+                    <li><a href = "index.php">Trang chủ</a></li>
+                    <li><a href = "iphone.php">Iphone</a></li>
+                    <li><a href = "samsung.php">Samsung</a></li>
+                    <li><a href = "oppo.php">Oppo</a></li>
+                    <li><a href = "xiaomi.php">Xiaomi</a></li>
+        </ul>
+        </div>
+        </section>
+        
+        <section >
+            
+                    <div>
+                    <?php include './slider1.php';?>
+               
+                    <div class="content-right">
+                    <li><a href = "detail.php?id=22"><img src = "images/ip14.png" alt = ""></a></li>
+                    <li><a href = "detail.php?id=1"><img src = "images/zflip.png" alt = ""></a></li>
+                    <li><a href = ""><img src = "images/oppo.jpg" alt = ""></a></li>
+                    <li><a href = "detail.php?id=19"><img src = "images/redmi.png" alt = ""></a></li>
+                    </div>
+                    <div>
+            
+        </section>
+
         <?php
         include './connect_db.php';
         $item_per_page = !empty($_GET['per_page'])?$_GET['per_page']:10;
@@ -123,5 +172,8 @@
                 <div class="clear-both"></div>
             </div>
         </div>
+
+       
+     
     </body>
 </html>

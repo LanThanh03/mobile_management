@@ -1,4 +1,4 @@
-﻿kbd 
+
 body{
     font-family: arial;
     padding: 0;
@@ -43,7 +43,7 @@ h1{
     padding-left: 10px;
     border-right: 0;
     float: left;
-    width: 165px; /*co chinh*/
+    width: 170px;
     max-height: 90px;
     overflow: hidden;
 }
@@ -68,7 +68,7 @@ h1{
     border-top: 1px solid #ccc;
 }
 .listing-time{
-    width: 127px;
+    width: 126px;
     text-align: center;
 }
 .listing-item-heading{
@@ -102,12 +102,14 @@ a:hover{
 #admin-heading-panel{
     background: #717171;
     height: 50px;
+    
     line-height: 50px;
     color: #fff;
 }
-#admin-heading-panel a{
-    color: #fff;
-}
+    #admin-heading-panel a {
+        color: #fff;
+        width: 110px;
+    }
 .left-panel{
     float: left;
 }
@@ -300,7 +302,7 @@ select[name="parent_id"]{
 /*Lesson 23*/
 .listing-address{
     float: left;
-    width: 217px;
+    width: 180px;
 }
 .listing-phone{
     float: left;
@@ -315,6 +317,16 @@ select[name="parent_id"]{
     float: left;
     width: 74px;
     text-align: center;
+}
+.listing-accounts{
+    padding-left: 10px;
+    border-right: 0;
+    float: left;
+    width: 250px;
+    max-height: 90px;
+    overflow: hidden;
+    text-align: center;
+}
 }
 #order-detail-wrapper{
     width: 450px;

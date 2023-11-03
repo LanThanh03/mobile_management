@@ -64,9 +64,9 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
             <ul>
                 <li class="listing-item-heading">
                     <div class="listing-prop listing-id">ID</div>
-                    <div class="listing-prop listing-name">Tên tài khoản</div>
-                    <div class="listing-prop listing-name">Họ tên </div>
-                    <div class="listing-prop listing-name">Phân quyền</div>
+                    <div class="listing-prop listing-accounts">Tên tài khoản</div>
+                    <div class="listing-prop listing-accounts">Họ tên </div>
+                    <div class="listing-prop listing-accounts">Phân quyền</div>
                     
 
                     <div class="clear-both"></div>
@@ -78,9 +78,9 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
                     ?>
                     <li>
                         <div class="listing-prop listing-id"><?= $row['id'] ?></div>
-                        <div class="listing-prop listing-name"><?= $row['username'] ?></div>
-                        <div class="listing-prop listing-name"><?= $row['fullname'] ?></div>
-                        <div class="listing-prop listing-name"><?= $row['role'] ?></div>
+                        <div class="listing-prop listing-accounts"><?= $row['username'] ?></div>
+                        <div class="listing-prop listing-accounts"><?= $row['fullname'] ?></div>
+                        <div class="listing-prop listing-accounts"><?= $row['role'] ?></div>
 
                         <div class="clear-both"></div>
                     </li>

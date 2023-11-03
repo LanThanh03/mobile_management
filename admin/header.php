@@ -75,12 +75,29 @@ and open the template in the editor.
             <div id="content-wrapper">
                 <div class="container">
                     <div class="left-menu">
-                        <div class="menu-heading">Admin Menu</div>
-                        <div class="menu-items">
-                            <ul>
-                                <li><a href="product_listing.php">Sản phẩm</a></li>
-                                <li><a href="order_listing.php">Đơn hàng</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                <?php } ?>
+                        <?php 
+                            if($currentUser['role']  == "staff" ){
+                            ?>
+                                <div class="menu-heading">Staff Menu</div>
+                                <div class="menu-items">
+                                    <ul>
+                                        <li><a href="product_listing.php">Sản phẩm</a></li>
+                                        <li><a href="order_listing.php">Đơn hàng</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <?php }
+                            else
+                            {?>
+                                <div class="menu-heading">Admin Menu</div>
+                                <div class="menu-items">
+                                    <ul>
+                                        <li><a href="product_listing.php">Sản phẩm</a></li>
+                                        <li><a href="order_listing.php">Đơn hàng</a></li>
+                                        <li><a href="manage_accounts.php">Quản lý tài khoản</a></li>
+                                    </ul>
+                                </div>
+                            </div> 
+                            <?php
+                            }
+                    } ?>

@@ -6,21 +6,21 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Bài 19: Chi tiết sản phẩm</title>
+        <title>Chi tiết sản phẩm</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            body{
-                font-family: arial;
-            }
-            .container{
+             .container{
                 width: 1200px;
                 margin: 0 auto;
                 border: 1px solid #000;
-                padding: 15px;
+                padding: 35px;
             }
-            h1{
-                text-align: center;
+            h2{
+                color: darkcyan;
+            }
+            label{
+                font-size: 20px;
             }
             .product-items{
                 border: 1px solid #ccc;
@@ -47,6 +47,7 @@ and open the template in the editor.
             .product-price{
                 color: red;
                 font-weight: bold;
+                font-size: 20px;
             }
             .product-img{
                 padding: 5px;
@@ -76,15 +77,6 @@ and open the template in the editor.
             a{
                 text-decoration: none;
             }
-            .buy-button{
-                text-align: right;
-                margin-top: 10px;
-            }
-            .buy-button a{
-                background: #444;
-                padding: 5px;
-                color: #fff;
-            }
             #pagination{
                 text-align: right;
                 margin-top: 15px;
@@ -94,11 +86,6 @@ and open the template in the editor.
                 padding: 5px 9px;
                 color: #000;
             }
-            .current-page{
-                background: #000;
-                color: #FFF;
-            }
-
             #product-detail{
                 border-top: 1px solid #000;
                 padding: 15px 0 0 0;
@@ -122,17 +109,13 @@ and open the template in the editor.
             h1{
                 text-align: left;
                 margin-top: 0;
+                font-weight: bold;
             }
-            label.add-to-cart{
-                background: #000;
-                border: 1px solid #000;
+            #add-to-cart{
                 margin-top: 15px;
                 padding: 15px;
                 display: inline-block;
                 color: #fff;
-            }
-            label a{
-                color: #FFF;
             }
             #gallery{
                 margin-top: 10px;
@@ -158,8 +141,19 @@ and open the template in the editor.
                 max-height: 100%;
                 vertical-align: middle;
             }
-            *{
-                box-sizing: border-box;
+            .form-control{
+                background: blue;
+            } 
+            .quantity-button {
+                width: 50px;
+                padding: 7px;
+                border: 1px solid #ccc;
+            }
+            .submit-button {
+            background-color: darkcyan;;
+            color: white;
+            padding: 10px 20px;
+            border: none;
             }
         </style>
     </head>
@@ -180,9 +174,9 @@ and open the template in the editor.
                 <div id="product-info">
                     <h1><?=$product['name']?></h1>
                     <label>Giá: </label><span class="product-price"><?= number_format($product['price'], 0, ",", ".") ?> VND</span><br/>
-                    <form id="add-cart" action="cart.php?action=add" method="POST">
-                        <input type="text" value="1" name="quantity[<?= $product['id'] ?>]" size="2" /><br/>
-                        <input type="submit" value="Mua sản phẩm" />
+                    <form id="add-to-cart" action="cart.php?action=add" method="POST">
+                        <input type="number" min="1" value="1" name="quantity[<?= $product['id'] ?>]" size="2" class="quantity-button" />
+                        <input type="submit" value="Mua sản phẩm" class="submit-button" />
                     </form>
                     <?php if(!empty($product['images'])){ ?>
                     <div id="gallery">
@@ -195,8 +189,9 @@ and open the template in the editor.
                     <?php } ?>
                 </div>
                 <div class="clear-both"></div>
-                <?=$product['content']?>
+                <br><span style="font-size: 22px;"><?=$product['content']?></span>
             </div>
         </div>
     </body>
+    <?php include './slider.php'; ?>
 </html>

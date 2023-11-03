@@ -42,6 +42,8 @@ and open the template in the editor.
             background-color: #f1f1f1;
         }
     </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     </head>
     <body>
         <?php
@@ -62,7 +64,7 @@ and open the template in the editor.
                         <div class="right-panel">
                             <?php // Liên kết dropdown ?>
                             <div class="account-dropdown" > 
-                                <span class="account-name">📁 Tài khoản</span>
+                                <span class="account-name">💃 Tài khoản</span>
                                 <div class="account-dropdown-taikhoan">
                                     <a href="logout.php" style ="color:black;">🕹️  Đăng xuất</a>
                                     <a href="edit.php"style ="color:black;">🔐  Đổi mật khẩu</a>
@@ -75,12 +77,29 @@ and open the template in the editor.
             <div id="content-wrapper">
                 <div class="container">
                     <div class="left-menu">
-                        <div class="menu-heading">Admin Menu</div>
-                        <div class="menu-items">
-                            <ul>
-                                <li><a href="product_listing.php">Sản phẩm</a></li>
-                                <li><a href="order_listing.php">Đơn hàng</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                <?php } ?>
+                        <?php 
+                            if($currentUser['role']  == "staff" ){
+                            ?>
+                                <div class="menu-heading">Staff Menu</div>
+                                <div class="menu-items">
+                                    <ul>
+                                        <li><a href="product_listing.php">Sản phẩm</a></li>
+                                        <li><a href="order_listing.php">Đơn hàng</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <?php }
+                            else
+                            {?>
+                                <div class="menu-heading">Admin Menu</div>
+                                <div class="menu-items">
+                                    <ul>
+                                        <li><a href="product_listing.php">Sản phẩm</a></li>
+                                        <li><a href="order_listing.php">Đơn hàng</a></li>
+                                        <li><a href="manage_accounts.php">Quản lý tài khoản</a></li>
+                                    </ul>
+                                </div>
+                            </div> 
+                            <?php
+                            }
+                    } ?>

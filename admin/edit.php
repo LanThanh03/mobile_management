@@ -53,6 +53,22 @@ and open the template in the editor.
             {
                 cursor: pointer;
             }
+            #show-hide1
+            {
+                cursor: pointer;
+            }
+            .an-hien-password1 /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+            {
+                position: absolute; 
+                top: 50%;
+                right: 5px;
+                transform: translateY(-50%);
+            }
+            .input-password1 /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+            {
+                position: relative;
+            }
+
         </style>
     </head>
     <body>
@@ -104,14 +120,14 @@ and open the template in the editor.
                         <label style="font-size: 20px;">Old password</label></br>
                         <?php //  <input type="password" name="old_password" value="" /></br>?>
                         <div class="input-password">
-                            <input type="password" name="old-password" id="password" placeholder="Nhập mật khẩu cũ">
+                            <input type="password" name="old_password" id="password" placeholder="Nhập mật khẩu cũ">
                             <span class="an-hien-password" id="show-hide" onclick="showPassword()">🙈</span>
                         </div>
                         <label style="font-size: 20px;">New password</label></br>
                         <?php // <input type="password" name="new_password" value="" /></br> ?>
-                        <div class="input-password">
-                            <input type="password" name="new-password" id="password" placeholder="Nhập mật khẩu mới">
-                            <span class="an-hien-password" id="show-hide" onclick="showPassword()">🙈</span>
+                        <div class="input-password1">
+                            <input type="password" name="new_password" id="password1" placeholder="Nhập mật khẩu mới">
+                            <span class="an-hien-password1" id="show-hide1" onclick="showPassword1()">🙈</span>
                         </div>
                         <br><br>
                         <input type="submit" value="Lưu" style="text-decoration: none; background-color: green; color: white; padding: 8px; margin: 1px 10px;" />
@@ -126,6 +142,20 @@ and open the template in the editor.
                 {
                     var passwordField = document.getElementById("password");
                     var showHideIcon = document.getElementById("show-hide");
+                    
+                    if (passwordField.type === "password") 
+                            {
+                                passwordField.type = "text"; // Hiển thị mật khẩu
+                                showHideIcon.textContent = "🙉"; // Biểu tượng khi hiên mật khẩu
+                            } else {
+                                passwordField.type = "password"; // Ẩn mật khẩu
+                                showHideIcon.textContent = "🙈"; // Biểu tượng khi ẩn mật khẩu
+                            }
+                }
+                function showPassword1() 
+                {
+                    var passwordField = document.getElementById("password1");
+                    var showHideIcon = document.getElementById("show-hide1");
                     
                     if (passwordField.type === "password") 
                             {

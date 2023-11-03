@@ -1,3 +1,4 @@
+
 <?php
 include 'header.php';
 date_default_timezone_set('Asia/Ho_Chi_Minh');
@@ -47,7 +48,7 @@ if (!empty($_SESSION['current_user'])) {
                 </form>
             </div>
             <?php 
-            if (isset ($_SESSION['product_filter']) && ($_SESSION['order_filter']["id"] != "" || $_SESSION['order_filter']["phone"] != "")){?>
+            if (isset ($_SESSION['order_filter']) && ($_SESSION['order_filter']["id"] != "" || $_SESSION['order_filter']["phone"] != "")){?>
                 <div class="total-items">
                     <span>Tìm thấy <strong><?=$totalRecords?></strong> đơn hàng</span>
                 </div>
@@ -71,7 +72,9 @@ if (!empty($_SESSION['current_user'])) {
                     <div class="listing-prop listing-address"><?=$row['address']?></div>
                     <div class="listing-prop listing-phone"><?=$row['phone']?></div>
                     <div class="listing-prop listing-button">
-                        <a href="order_printing.php?id=<?=$row['id']?>" target="_blank">In</a>
+                        <a href="order_printing.php?id=<?=$row['id']?>" target="_blank"><span class="material-symbols-outlined">
+print
+</span></a>
                     </div>
                     <div class="listing-prop listing-time"><?=date('d/m/Y H:i', $row['created_time'])?></div>
                     <div class="clear-both"></div>

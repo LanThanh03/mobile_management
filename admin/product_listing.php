@@ -1,3 +1,4 @@
+
 <?php
 include 'header.php';
 date_default_timezone_set('Asia/Ho_Chi_Minh');//admin sua
@@ -90,11 +91,11 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
                         <div class="listing-prop listing-quantity"><?= $row['quantity'] ?></div>
                         <div class="listing-prop listing-time"><?= date('d/m/Y H:i', $row['created_time']) ?></div>
                         <div class="listing-prop listing-time"><?= date('d/m/Y H:i', $row['last_updated']) ?></div>
-                        <div class="listing-prop listing-button">
-                            <a href="./product_editing.php?id=<?= $row['id'] ?>">Sửa</a>
+                        <div class="listing-prop listing-button" >
+                            <a href="./product_editing.php?id=<?= $row['id'] ?>"><i class="fa fa-pencil fa-2x"></i></a>
                         </div>
                         <div class="listing-prop listing-button">
-                            <a href="./product_delete.php?id=<?= $row['id'] ?>">Xóa</a>
+                            <a href="./product_delete.php?id=<?= $row['id'] ?>"><i class="fa fa-trash fa-2x"></i></a>
                         </div>
 
                         <div class="clear-both"></div>

@@ -41,7 +41,7 @@ if (!empty($_SESSION['current_user'])) {
                     <fieldset>
                         <legend>Tìm kiếm đơn hàng:</legend>
                         ID: <input type="number" name="id" value="<?= !empty($id) ? $id : "" ?>" />
-                        Số điện thoại: <input type="number" name="phone" value="<?= !empty($phone) ? $phone : "" ?>" />
+                        Số điện thoại: <input type="text" name="phone" value="<?= !empty($phone) ? $phone : "" ?>" />
                         <input type="submit" value="Tìm kiếm" />
                     </fieldset>
                 </form>

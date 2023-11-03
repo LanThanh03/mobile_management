@@ -1,11 +1,11 @@
 <?php
  include 'header.php';
-$config_name = "account";
+$config_name = "accounts";
 $config_title = "tài khoản";
 if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng nhập chưa
     if(!empty($_GET['action']) && $_GET['action'] == 'search' && !empty($_POST)){
         $_SESSION['account_filter'] = $_POST;
-        header('Location: manage_account.php');exit;
+        header('Location: manage_accounts.php');exit;
     }
         if(!empty($_SESSION['account_filter'])){ //có lưu dữ liệu tìm kiếm nào hay không
             $where = "";
@@ -58,9 +58,12 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
                     </fieldset>
                 </form>
             </div>
-            <div class="total-items">
-                <span>Có tất cả <strong><?=$totalRecords?></strong> <?=$config_title?> trên <strong><?=$totalPages?></strong> trang</span>
-            </div>
+            <?php 
+            if (isset ($_SESSION['account_filter']) && ($_SESSION['account_filter']["id"] != "" || $_SESSION['account_filter']["username"] != "")){?>
+                <div class="total-items">
+                    <span>Tìm thấy <strong><?=$totalRecords?></strong> đơn hàng</span>
+                </div>
+            <?php } ?>
             <ul>
                 <li class="listing-item-heading">
                     <div class="listing-prop listing-id">ID</div>

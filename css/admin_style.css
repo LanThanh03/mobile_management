@@ -23,7 +23,7 @@ h1{
     margin: 0;
 }
 .listing-prop{
-    float: right;
+    float: left;
     border-left: 1px solid #ccc;
     line-height: 90px;
     padding: 0 10px;
@@ -38,6 +38,7 @@ h1{
     padding: 5px;
     height: 80px;
 }
+
 .listing-name{
     padding-left: 10px;
     border-right: 0;
@@ -47,7 +48,7 @@ h1{
     overflow: hidden;
 }
 .listing-button{
-    float: right;
+    float: left;
     border-left: 1px solid #ccc;
     border-right: 0;
     padding: 0 10px;
@@ -67,7 +68,7 @@ h1{
     border-top: 1px solid #ccc;
 }
 .listing-time{
-    width: 150px;
+    width: 126px;
     text-align: center;
 }
 .listing-item-heading{
@@ -75,9 +76,9 @@ h1{
     font-weight: bold;
 }
 .listing-item-heading .listing-prop{
-    height: 40px;
+    height: 60px;
     line-height: 40px;
-    background: #717171;
+    background: darkcyan;
     color: #FFF;
 }
 .buttons{
@@ -90,8 +91,9 @@ h1{
 .buttons a{
     color: #FFF;
     padding: 10px;
-    background: #000;
+    background: rgb(0, 77, 77);
 }
+
 a{
     text-decoration: none;
 }
@@ -99,14 +101,15 @@ a:hover{
     text-decoration: underline;
 }
 #admin-heading-panel{
-    background: #717171;
+    background: darkcyan;
     height: 50px;
     line-height: 50px;
     color: #fff;
 }
-#admin-heading-panel a{
-    color: #fff;
-}
+    #admin-heading-panel a {
+        color: #fff;
+        width: 110px;
+    }
 .left-panel{
     float: left;
 }
@@ -135,7 +138,7 @@ a:hover{
 .main-content h1{
     margin: 0;
     text-align: left;
-    background: #525151;
+    background: cadetblue;
     color: #fff;
     font-size: 18px;
     font-weight: normal;
@@ -143,17 +146,11 @@ a:hover{
     border-radius: 10px 10px 0 0;
     padding: 0 10px;
 }
-#admin-footer{
-    background: #717171;
-    padding: 5px 0;
-    line-height: 60px;
-    color: #FFF;
-}
 #content-wrapper .container{
     padding: 15px 0;
 }
 .menu-heading{
-    background: #525151;
+    background: cadetblue;
     line-height: 20px;
     padding: 10px;
     color: #FFF;
@@ -191,7 +188,7 @@ a:hover{
     color: #000;
 }
 .current-page{
-    background: #000;
+    background: cadetblue;
     color: #FFF;
 }
 #listing-editing{
@@ -263,6 +260,10 @@ a:hover{
     bottom: 3px;
     right: 0;
 }
+.thuonghieu
+{
+    margin-bottom:15px;
+}
 
 .box-content{
     margin: 0 auto;
@@ -303,8 +304,23 @@ select[name="parent_id"]{
 }
 .listing-id{
     float: left;
-    width: 50px;
+    width: 40px;
     text-align: center;
+}
+.listing-quantity{
+    float: left;
+    width: 74px;
+    text-align: center;
+}
+.listing-accounts{
+    padding-left: 10px;
+    border-right: 0;
+    float: left;
+    width: 250px;
+    max-height: 90px;
+    overflow: hidden;
+    text-align: center;
+}
 }
 #order-detail-wrapper{
     width: 450px;

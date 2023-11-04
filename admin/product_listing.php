@@ -1,5 +1,7 @@
+
 <?php
 include 'header.php';
+date_default_timezone_set('Asia/Ho_Chi_Minh');//admin sua
 $config_name = "product";
 $config_title = "sản phẩm";
 if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng nhập chưa
@@ -7,9 +9,9 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
         $_SESSION['product_filter'] = $_POST;
         header('Location: product_listing.php');exit;
     }
-    if(!empty($_SESSION['product_filter'])){ //có lưu dữ liệu tìm kiếm nào hay không
-        $where = "";
-        foreach ($_SESSION['product_filter'] as $field => $value) {
+        if(!empty($_SESSION['product_filter'])){ //có lưu dữ liệu tìm kiếm nào hay không
+            $where = "";
+            foreach ($_SESSION['product_filter'] as $field => $value) {
             if(!empty($value)){
                 switch ($field) {
                     case 'name':
@@ -35,66 +37,67 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
     $totalRecords = $totalRecords->num_rows;
     $totalPages = ceil($totalRecords / $item_per_page);
     if(!empty($where)){
-        $products = mysqli_query($con, "SELECT * FROM `product` where (".$where.") ORDER BY `id` DESC LIMIT " . $item_per_page . " OFFSET " . $offset);
+        $products = mysqli_query($con, "SELECT * FROM `product` where (".$where.") ORDER BY `id` LIMIT " . $item_per_page . " OFFSET " . $offset);
     }else{
-        $products = mysqli_query($con, "SELECT * FROM `product` ORDER BY `id` DESC LIMIT " . $item_per_page . " OFFSET " . $offset);
+        $products = mysqli_query($con, "SELECT * FROM `product` ORDER BY `id`  LIMIT " . $item_per_page . " OFFSET " . $offset);
     }
     mysqli_close($con);
     ?>
 
     <div class="main-content">
-        <h1>Danh sách <?=$config_title?></h1>
+        <h1>Danh sách sản phẩm</h1>
         <div class="listing-items">
             <div class="buttons">
-                <a href="./<?=$config_name?>_editing.php">Thêm <?=$config_title?></a>
+                <a href="./product_editing.php">Thêm sản phẩm</a>
             </div>  
             <div class="listing-search">
-                <form id="<?=$config_name?>-search-form" action="<?=$config_name?>_listing.php?action=search" method="POST">
+                <form id="product-search-form" action="product_listing.php?action=search" method="POST">
                     <fieldset>
-                        <legend>Tìm kiếm <?=$config_title?>:</legend>
-                        ID: <input type="text" name="id" value="<?=!empty($id)?$id:""?>" />
-                        Tên <?=$config_title?>: <input type="text" name="name" value="<?=!empty($name)?$name:""?>" />
-                        <input type="submit" value="Tìm" />
+                        <legend>Tìm kiếm sản phẩm:</legend>
+                        ID: <input type="number" name="id" value="<?=!empty($id)?$id:""?>" />
+                        Tên sản phẩm: <input type="text" name="name" value="<?=!empty($name)?$name:""?>" />
+                        <input type="submit" value="Tìm kiếm" />
                     </fieldset>
                 </form>
             </div>
-            <div class="total-items">
-                <span>Có tất cả <strong><?=$totalRecords?></strong> <?=$config_title?> trên <strong><?=$totalPages?></strong> trang</span>
-            </div>
+            <?php 
+            if (isset ($_SESSION['product_filter']) && ($_SESSION['product_filter']["id"] != "" || $_SESSION['product_filter']["name"] != "")){?>
+                <div class="total-items">
+                    <span>Tìm thấy <strong><?=$totalRecords?></strong> sản phẩm</span>
+                </div>
+            <?php } ?>
+            
+
             <ul>
                 <li class="listing-item-heading">
-                    <div class="listing-prop listing-img">Ảnh</div>
-                    <div class="listing-prop listing-name">Tên <?=$config_title?></div>
-                    <div class="listing-prop listing-button">
-                        Xóa
-                    </div>
-                    <div class="listing-prop listing-button">
-                        Sửa
-                    </div>
-                    <div class="listing-prop listing-button">
-                        Copy
-                    </div>
+                    <div class="listing-prop listing-id">ID</div>
+                    <div class="listing-prop listing-quantity"> Danh mục</div>
+                    <div class="listing-prop listing-name">Tên sản phẩm </div>
+                    <div class="listing-prop listing-quantity"> Số Lượng</div>
                     <div class="listing-prop listing-time">Ngày tạo</div>
                     <div class="listing-prop listing-time">Ngày cập nhật</div>
+                    <div class="listing-prop listing-button">Sửa</div>
+                    <div class="listing-prop listing-button">Xóa</div>
                     <div class="clear-both"></div>
                 </li>
                 <?php
+                
                 while ($row = mysqli_fetch_array($products)) {
                     ?>
                     <li>
-                        <div class="listing-prop listing-img"><img src="../<?= $row['image'] ?>" alt="<?= $row['name'] ?>" title="<?= $row['name'] ?>" /></div>
+                        <div class="listing-prop listing-id"><?= $row['id'] ?></div>
+                        <div class="listing-prop listing-quantity"><?= $row['category'] ?></div>
                         <div class="listing-prop listing-name"><?= $row['name'] ?></div>
-                        <div class="listing-prop listing-button">
-                            <a href="./product_delete.php?id=<?= $row['id'] ?>">Xóa</a>
-                        </div>
-                        <div class="listing-prop listing-button">
-                            <a href="./product_editing.php?id=<?= $row['id'] ?>">Sửa</a>
-                        </div>
-                        <div class="listing-prop listing-button">
-                            <a href="./product_editing.php?id=<?= $row['id'] ?>&task=copy">Copy</a>
-                        </div>
+                        <div class="listing-prop listing-quantity"><?= $row['quantity'] ?></div>
                         <div class="listing-prop listing-time"><?= date('d/m/Y H:i', $row['created_time']) ?></div>
                         <div class="listing-prop listing-time"><?= date('d/m/Y H:i', $row['last_updated']) ?></div>
+                        <div class="listing-prop listing-button" >
+                            <a href="./product_editing.php?id=<?= $row['id'] ?>"><i class="fa fa-pencil fa-2x"></i></a>
+                        </div>
+                        <div class="listing-prop listing-button">
+                            <a href="./product_delete.php?id=<?= $row['id'] ?>"><i class="fa fa-trash fa-2x"></i></a>
+                        </div>
+
                         <div class="clear-both"></div>
                     </li>
                 <?php } ?>

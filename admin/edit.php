@@ -6,24 +6,73 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Đổi mật khâu</title>
+        <title>Đổi thông tin thành viên</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+            body{
+                font-family:arial;
+                font-size:14px;
+            }
             .box-content{
-                margin: 0 auto;
-                width: 800px;
-                border: 1px solid #ccc;
-                text-align: center;
-                padding: 20px;
+                position: absolute;
+                    top: 42%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 400px;
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    text-align: center;
+                    background-color: #F0FFF0;
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);/* đổ bóng*/
+                    border-radius: 20px;
             }
             #edit_user form{
-                width: 200px;
-                margin: 40px auto;
+                    width: 100%;
+                    margin: 20px auto;
+                    width: 300px;
             }
             #edit_user form input{
-                margin: 5px 0;
+                margin: 10px 0;
+                    padding: 10px;
+                    width: 100%; 
+                    border-radius: 7px;
             }
+            .button-edit
+            {
+                text-decoration: none; background-color: green; color: white; padding: 8px; margin: 20px 6px;
+            }
+            .input-password /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+            {
+                position: relative;
+            }
+            .an-hien-password /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+            {
+                position: absolute; 
+                top: 50%;
+                right: 5px;
+                transform: translateY(-50%);
+            }
+            #show-hide 
+            {
+                cursor: pointer;
+            }
+            #show-hide1
+            {
+                cursor: pointer;
+            }
+            .an-hien-password1 /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+            {
+                position: absolute; 
+                top: 50%;
+                right: 5px;
+                transform: translateY(-50%);
+            }
+            .input-password1 /*căn chỉnh cho nút ẩn/hiện mật khẩu vô ô input */
+            {
+                position: relative;
+            }
+
         </style>
     </head>
     <body>
@@ -40,26 +89,26 @@ and open the template in the editor.
                         $error = "Không thể cập nhật tài khoản";
                     }
                 } else {
-                    $error = "Mật khẩu cũ không đúng.";
+                    $error = "Mật khẩu cũ không đúng";
                 }
                 mysqli_close($con);
                 if ($error !== false) {
                     ?>
                     <div id="error-notify" class="box-content">
-                        <h1>Thông báo</h1>
+                        <h2>Thông báo</h2>
                         <h4><?= $error ?></h4>
-                        <a href="./edit.php">Đổi lại mật khẩu</a>
+                        <a href="./edit.php" style="text-decoration: none;">Quay lại</a> 
                     </div>
                 <?php } else { ?>
                     <div id="edit-notify" class="box-content">
-                        <h1><?= ($error !== false) ? $error : "Sửa tài khoản thành công" ?></h1>
-                        <a href="./index.php">Quay lại tài khoản</a>
+                        <h2><?= ($error !== false) ? $error : "Sửa tài khoản thành công" ?></h2>
+                        <a href="../login.php"style="text-decoration: none;" >Quay lại tài khoản</a>
                     </div>
                 <?php } ?>
             <?php } else { ?>
                 <div id="edit-notify" class="box-content">
-                    <h1>Vui lòng nhập đủ thông tin để sửa tài khoản</h1>
-                    <a href="./edit.php">Quay lại sửa tài khoản</a>
+                    <h2>Vui lòng nhập đủ thông tin để sửa tài khoản</h2>
+                    <a href="./edit.php" style="text-decoration: none;">Tiếp tục</a>
                 </div>
                 <?php
             }
@@ -69,20 +118,58 @@ and open the template in the editor.
             if (!empty($user)) {
                 ?>
                 <div id="edit_user" class="box-content">
-                    <h1>Xin chào "<?= $user['fullname'] ?>". Bạn đang thay đổi mật khẩu</h1>
+                    <h1>Đổi mật khẩu</h1>
                     <form action="./edit.php?action=edit" method="Post" autocomplete="off">
                         <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                        <label>Password cũ</label></br>
-                        <input type="password" name="old_password" value="" /></br>
-                        <label>Password mới</label></br>
-                        <input type="password" name="new_password" value="" /></br>
+                        <label style="font-size: 20px;">Old password</label></br>
+                        <?php //  <input type="password" name="old_password" value="" /></br>?>
+                        <div class="input-password">
+                            <input type="password" name="old_password" id="password" placeholder="Nhập mật khẩu cũ">
+                            <span class="an-hien-password" id="show-hide" onclick="showPassword()">🙈</span>
+                        </div>
+                        <label style="font-size: 20px;">New password</label></br>
+                        <?php // <input type="password" name="new_password" value="" /></br> ?>
+                        <div class="input-password1">
+                            <input type="password" name="new_password" id="password1" placeholder="Nhập mật khẩu mới">
+                            <span class="an-hien-password1" id="show-hide1" onclick="showPassword1()">🙈</span>
+                        </div>
                         <br><br>
-                        <input type="submit" value="Edit" />
+                        <input type="submit" value="Lưu" style="text-decoration: none; background-color: green; color: white; padding: 8px; margin: 1px 10px;" />
                     </form>
                 </div>
                 <?php
             }
         }
         ?>
+        <script>
+                function showPassword() 
+                {
+                    var passwordField = document.getElementById("password");
+                    var showHideIcon = document.getElementById("show-hide");
+                    
+                    if (passwordField.type === "password") 
+                            {
+                                passwordField.type = "text"; // Hiển thị mật khẩu
+                                showHideIcon.textContent = "🙉"; // Biểu tượng khi hiên mật khẩu
+                            } else {
+                                passwordField.type = "password"; // Ẩn mật khẩu
+                                showHideIcon.textContent = "🙈"; // Biểu tượng khi ẩn mật khẩu
+                            }
+                }
+                function showPassword1() 
+                {
+                    var passwordField = document.getElementById("password1");
+                    var showHideIcon = document.getElementById("show-hide1");
+                    
+                    if (passwordField.type === "password") 
+                            {
+                                passwordField.type = "text"; // Hiển thị mật khẩu
+                                showHideIcon.textContent = "🙉"; // Biểu tượng khi hiên mật khẩu
+                            } else {
+                                passwordField.type = "password"; // Ẩn mật khẩu
+                                showHideIcon.textContent = "🙈"; // Biểu tượng khi ẩn mật khẩu
+                            }
+                }
+            </script>
     </body>
 </html>

@@ -1,11 +1,11 @@
 <?php
  include 'header.php';
-$config_name = "account";
+$config_name = "accounts";
 $config_title = "tài khoản";
 if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng nhập chưa
     if(!empty($_GET['action']) && $_GET['action'] == 'search' && !empty($_POST)){
         $_SESSION['account_filter'] = $_POST;
-        header('Location: manage_account.php');exit;
+        header('Location: manage_accounts.php');exit;
     }
         if(!empty($_SESSION['account_filter'])){ //có lưu dữ liệu tìm kiếm nào hay không
             $where = "";
@@ -46,7 +46,7 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
         <h1>Danh sách <?=$config_title?></h1>
         <div class="listing-items">
             <div class="buttons">
-                <a href="./manage_<?=$config_name?>.php">Thêm <?=$config_title?></a>
+                <a href="./register.php" style="text-decoration: none;">Thêm tài khoản</a>
             </div>  
             <div class="listing-search">
                 <form id="<?=$config_name?>-search-form" action="manage_<?=$config_name?>.php?action=search" method="POST">
@@ -58,19 +58,19 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
                     </fieldset>
                 </form>
             </div>
-            <div class="total-items">
-                <span>Có tất cả <strong><?=$totalRecords?></strong> <?=$config_title?> trên <strong><?=$totalPages?></strong> trang</span>
-            </div>
+            <?php 
+            if (isset ($_SESSION['account_filter']) && ($_SESSION['account_filter']["id"] != "" || $_SESSION['account_filter']["username"] != "")){?>
+                <div class="total-items">
+                    <span>Tìm thấy <strong><?=$totalRecords?></strong> tài khoản</span>
+                </div>
+            <?php } ?>
             <ul>
                 <li class="listing-item-heading">
                     <div class="listing-prop listing-id">ID</div>
                     <div class="listing-prop listing-accounts">Tên tài khoản</div>
                     <div class="listing-prop listing-accounts">Họ tên </div>
                     <div class="listing-prop listing-accounts">Phân quyền</div>
-                    
-
                     <div class="clear-both"></div>
-
                 </li>
                 <?php
                 while ($row = mysqli_fetch_array($products)) {
@@ -81,7 +81,6 @@ if (!empty($_SESSION['current_user'])) { //kiểm tra người dùng đã đăng
                         <div class="listing-prop listing-accounts"><?= $row['username'] ?></div>
                         <div class="listing-prop listing-accounts"><?= $row['fullname'] ?></div>
                         <div class="listing-prop listing-accounts"><?= $row['role'] ?></div>
-
                         <div class="clear-both"></div>
                     </li>
                 <?php } ?>

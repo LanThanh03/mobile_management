@@ -10,12 +10,22 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            .box-content{
-                margin: 0 auto;
-                width: 800px;
-                border: 1px solid #ccc;
-                text-align: center;
-                padding: 20px;
+            body{
+                font-family:arial;
+                font-size:14px;
+            }
+            .box-content {
+                    position: absolute;
+                    top: 42%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 400px;
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    text-align: center;
+                    background-color: #F0FFF0;
+                    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);/* đổ bóng*/
+                    border-radius: 20px;
             }
             #user_logout form{
                 width: 200px;
@@ -33,7 +43,8 @@ and open the template in the editor.
         ?>
         <div id="user_logout" class="box-content">
             <h1>Đăng xuất tài khoản thành công</h1>
-            <a href="./index.php">Đăng nhập lại</a>
+            <a href="../login.php">Đăng nhập lại</a><br>
+            <a href="../index.php">Trang chủ</a>
         </div>
     </body>
 </html>

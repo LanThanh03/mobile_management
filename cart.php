@@ -81,7 +81,6 @@
                             if (!isset($_SESSION["cart"][$id])) {
                                 $_SESSION["cart"][$id] = 0;
                             }
-                            var_dump($_SESSION["cart"][$id]);
                             if ($add) {
                                 $_SESSION["cart"][$id] += $quantity;
                             } else {

@@ -76,8 +76,9 @@ and open the template in the editor.
             {
                 $fullname = $_POST['fullname'];
                 $phone = $_POST['phone'];
-                    $result = mysqli_query($con, "INSERT INTO `user` (`fullname`,`username`, `password`, `phone`, `status`, `created_time`, `last_updated`) 
-                                            VALUES ('" . $_POST['fullname'] . "', '" . $_POST['username'] . "', MD5('" . $_POST['password'] . "'), '" . $phone . "', 1, " . time() . ", '" . time() . "');");
+                $role = $_POST['role'];
+                    $result = mysqli_query($con, "INSERT INTO `user` (`fullname`,`username`, `password`, `phone`,`role`, `status`, `created_time`, `last_updated`) 
+                                            VALUES ('" . $_POST['fullname'] . "', '" . $_POST['username'] . "', MD5('" . $_POST['password'] . "'), '" . $phone . "','" . $role . "', 1, " . time() . ", '" . time() . "');");
                     if (!$result) 
                     {
                         if (strpos(mysqli_error($con), "Duplicate entry") !== FALSE) 
@@ -97,7 +98,7 @@ and open the template in the editor.
                     { ?> 
                     <div id="edit-notify" class="box-content">
                         <h1><?= ($error !== false) ? $error : "Đăng ký tài khoản thành công" ?></h1>
-                        <a href="./manage_accounts.php"style="text-decoration: none;">Quay lại tài khoản</a>
+                        <a href="../index.php"style="text-decoration: none;">Quay lại tài khoản</a>
                     </div>
               <?php } ?>
             <?php }

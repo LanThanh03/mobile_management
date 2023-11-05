@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2023 at 04:37 PM
+-- Generation Time: Nov 05, 2023 at 05:59 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -114,7 +114,8 @@ INSERT INTO `orders` (`id`, `name`, `phone`, `address`, `note`, `total`, `create
 (15, 'lan thanh', '0342934923', 'Tân Bình, TPHCM', 'tetstye', 41470000, 1698860729, 1698860729),
 (16, 'thanh', '2302128', 'hhh', 'tét', 19190000, 1699106386, 1699106386),
 (17, 'thanh', '014182328', 'long an ', '123', 19590000, 1699107103, 1699107103),
-(18, 'thanh', '014182328', 'long an ', '123', 19590000, 1699107209, 1699107209);
+(18, 'thanh', '014182328', 'long an ', '123', 19590000, 1699107209, 1699107209),
+(19, 'thanh', '014182328', 'long an ', 'tặng em Bình gold', 24999000, 1699119269, 1699119269);
 
 -- --------------------------------------------------------
 
@@ -149,7 +150,8 @@ INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `quantity`, `price`,
 (56, 15, 10, 1, 8490000, 1698860729, 1698860729),
 (57, 16, 46, 1, 19190000, 1699106386, 1699106386),
 (58, 17, 4, 1, 19590000, 1699107103, 1699107103),
-(59, 18, 4, 1, 19590000, 1699107209, 1699107209);
+(59, 18, 4, 1, 19590000, 1699107209, 1699107209),
+(60, 19, 15, 1, 24999000, 1699119269, 1699119269);
 
 -- --------------------------------------------------------
 
@@ -188,9 +190,9 @@ INSERT INTO `product` (`id`, `name`, `image`, `price`, `quantity`, `content`, `c
 (12, 'Điện thoại Iphone 15 Pro', 'uploads/iphone15pro.png', 27990000, 10, 'Đặc điểm nổi bật của iPhone 15 Pro: Tăng độ cứng cáp và tối ưu khối lượng với chất liệu Titan. Bứt phá mọi giới hạn về hiệu năng nhờ chip A17 Pro Phiên bản duy nhất cải tiến camera tele 5x', 1552615987, 1552615987, 'Iphone'),
 (13, 'Điện thoại Oppo Reno10+ 5G', 'uploads/opporeno10pro+.png', 19990000, 7, 'OPPO Reno10 Pro+ 5G là một sản phẩm tiếp nối sự thành công của thế hệ trước đó, với thiết kế đẹp mắt, cấu hình mạnh mẽ và máy ảnh chất lượng cao. Máy đáp ứng được nhu cầu giải trí, chụp ảnh và làm việc của người dùng, là lựa chọn hoàn hảo cho những ai đang tìm kiếm một chiếc điện thoại đa năng và hiện đại. Tỏa sáng với diện mạo đẹp mắt', 1697358615, 1697373287, 'Oppo'),
 (14, 'Samsung Galaxy S23 5G 128GB', 'uploads/ssS23.png', 15990000, 4, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 12 GB. Dung lượng: 256 GB', 0, 0, 'Samsung'),
-(15, 'Điện thoại Iphone 15 Plus', 'uploads/iphone15.png', 24999000, 2, '• Màn hình Dynamic Island thay thế tai thỏ đầy tiện lợi\r\n• 5 phiên bản màu đặc sắc với thiết kế mặt kính pha màu đầu tiên trên thị trường\r\n• Sử dụng chip A16 Bionic cho hiệu năng vượt trội', 1552615987, 1552615987, 'Iphone'),
+(15, 'Điện thoại Iphone 15 Plus', 'uploads/iphone15plus.png', 24999000, 1, '• Màn hình Dynamic Island thay thế tai thỏ đầy tiện lợi\r\n• 5 phiên bản màu đặc sắc với thiết kế mặt kính pha màu đầu tiên trên thị trường\r\n• Sử dụng chip A16 Bionic cho hiệu năng vượt trội', 1552615987, 1552615987, 'Iphone'),
 (16, 'Điện thoại Samsung Galaxy S22 Ultra', 'uploads/ssS22ultra.png', 21999000, 4, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
-(17, 'Điện thoại Samsung Galaxy A54 5G', 'uploads/ssa54.png', 684000, 1, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
+(17, 'Điện thoại Samsung Galaxy A54 5G', 'uploads/ssa54.png', 6684000, 1, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
 (18, 'Điện thoại Oppo Reno8 Pro 5G', 'uploads/opporeno8pro.png', 13990000, 1, 'OPPO Reno8 Pro 5G là chiếc điện thoại cao cấp được nhà OPPO ra mắt vào thời điểm 09/2022, máy hướng đến sự hoàn thiện cao cấp ở phần thiết kế cùng khả năng quay chụp chuyên nghiệp nhờ trang bị vi xử lý hình ảnh MariSilicon X chuyên dụng.\r\nDáng vẻ cao cấp sang trọng\r\n\r\n', 1552615987, 1697095206, 'Oppo'),
 (19, 'Điện thoại Xiaomi Redmi Note 12 Pro', 'uploads/xiaomiredminote12pro.png', 8790000, 3, 'Xiaomi Redmi Note 12 Pro 5G mẫu điện thoại tầm trung được kỳ vọng sẽ trở thành sản phẩm quốc dân trong năm 2023, nhờ sở hữu khá nhiều sự nâng cấp với camera 50 MP, chip MediaTek mạnh mẽ cùng ngôn ngữ thiết kế mới vô cùng tối giản, hiện đại.\r\nDiện mạo hiện đại đi cùng màu sắc trẻ trung', 1552615987, 1552615987, 'Xiaomi'),
 (20, 'Điện thoại Xiaomi Note 12 Pro 5G', 'uploads/xiaominote12pro5g.png', 6590000, 4, 'Xiaomi Redmi Note 12 Pro 4G tiếp tục sẽ là mẫu điện thoại tầm trung được nhà Xiaomi giới thiệu đến thị trường Việt Nam trong năm 2023, máy nổi bật với camera 108 MP chất lượng, thiết kế viền mỏng cùng hiệu năng đột phá nhờ trang bị chip Snapdragon 732G.\r\nNgoại hình vuông vắn cùng kích thước viền mỏng', 1552615987, 1554822153, 'Xiaomi'),
@@ -221,7 +223,7 @@ INSERT INTO `product` (`id`, `name`, `image`, `price`, `quantity`, `content`, `c
 (45, 'Samsung Galaxy ZFlip4 5G', 'uploads/sszflip4.png', 12990000, 3, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 12 GB. Dung lượng: 256 GB. Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 12 GB. Dung lượng: 256 GB', 0, 0, 'Samsung'),
 (46, 'Điện thoại Iphone 14', 'uploads/iphone14.png', 19190000, 3, 'Chip Apple A15 Bionic. RAM: 6 GB. Dung lượng: 128 GB. Camera sau: 2 camera 12 MP. Camera trước: 12 MP. Pin 4325 mAh, Sạc 20 W', 1552615987, 1552615987, 'Iphone'),
 (47, 'Điện thoại Samsung Galaxy Zflip5', 'uploads/sszflip5.jpg', 21999000, 1, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
-(48, 'Điện thoại Samsung Galaxy S21 FE', 'uploads/ssS21FE.png', 684000, 2, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
+(48, 'Điện thoại Samsung Galaxy S21 FE', 'uploads/ssS21FE.png', 7684000, 2, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
 (49, 'Điện thoại Oppo A98', 'uploads/oppoa98.png', 13990000, 5, 'OPPO Reno8 Pro 5G là chiếc điện thoại cao cấp được nhà OPPO ra mắt vào thời điểm 09/2022, máy hướng đến sự hoàn thiện cao cấp ở phần thiết kế cùng khả năng quay chụp chuyên nghiệp nhờ trang bị vi xử lý hình ảnh MariSilicon X chuyên dụng.\r\nDáng vẻ cao cấp sang trọng\r\n\r\n', 1552615987, 1697095206, 'Oppo'),
 (50, 'Điện thoại Xiaomi Note 12 Pro', 'uploads/xiaominote12pro.png', 6590000, 7, 'Xiaomi Note 12 Pro mẫu điện thoại tầm trung được kỳ vọng sẽ trở thành sản phẩm quốc dân trong năm 2023, nhờ sở hữu khá nhiều sự nâng cấp với camera 50 MP, chip MediaTek mạnh mẽ cùng ngôn ngữ thiết kế mới vô cùng tối giản, hiện đại. Diện mạo hiện đại đi cùng màu sắc trẻ trung', 1552615987, 1552615987, 'Xiaomi'),
 (51, 'Điện thoại Xiaomi Redmi Note 12S', 'uploads/xiaominote12S.png', 5890000, 6, 'Xiaomi Redmi Note 12S tiếp tục sẽ là mẫu điện thoại tầm trung được nhà Xiaomi giới thiệu đến thị trường Việt Nam trong năm 2023, máy nổi bật với camera 108 MP chất lượng, thiết kế viền mỏng cùng hiệu năng đột phá nhờ trang bị chip Snapdragon 732G.\r\nNgoại hình vuông vắn cùng kích thước viền mỏng', 1552615987, 1554822153, 'Xiaomi'),
@@ -239,7 +241,7 @@ INSERT INTO `product` (`id`, `name`, `image`, `price`, `quantity`, `content`, `c
 (63, 'Samsung Galaxy S23 5G 128GB', 'uploads/ssS23.png', 15990000, 4, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 12 GB. Dung lượng: 256 GB', 0, 0, 'Samsung'),
 (64, 'Điện thoại Iphone 15 Plus', 'uploads/iphone15.png', 24999000, 2, '• Màn hình Dynamic Island thay thế tai thỏ đầy tiện lợi\r\n• 5 phiên bản màu đặc sắc với thiết kế mặt kính pha màu đầu tiên trên thị trường\r\n• Sử dụng chip A16 Bionic cho hiệu năng vượt trội', 1552615987, 1552615987, 'Iphone'),
 (65, 'Điện thoại Samsung Galaxy S22 Ultra', 'uploads/ssS22ultra.png', 21999000, 4, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
-(66, 'Điện thoại Samsung Galaxy A54 5G', 'uploads/ssa54.png', 684000, 1, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
+(66, 'Điện thoại Samsung Galaxy A54 5G', 'uploads/ssa54.png', 9684000, 1, 'Chip Snapdragon 8 Gen 2 for Galaxy. RAM: 8 GB. Dung lượng: 256 GB. Camera sau: 2 camera 12 MP. Camera trước: 10 MP. Pin 3700 mAh, Sạc 25W', 1552615987, 1552615987, 'Samsung'),
 (67, 'Điện thoại Oppo Reno8 Pro 5G', 'uploads/opporeno8pro.png', 13990000, 1, 'OPPO Reno8 Pro 5G là chiếc điện thoại cao cấp được nhà OPPO ra mắt vào thời điểm 09/2022, máy hướng đến sự hoàn thiện cao cấp ở phần thiết kế cùng khả năng quay chụp chuyên nghiệp nhờ trang bị vi xử lý hình ảnh MariSilicon X chuyên dụng.\r\nDáng vẻ cao cấp sang trọng\r\n\r\n', 1552615987, 1697095206, 'Oppo');
 
 -- --------------------------------------------------------
@@ -346,13 +348,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `product`

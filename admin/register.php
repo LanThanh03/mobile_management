@@ -98,7 +98,7 @@ and open the template in the editor.
                     { ?> 
                     <div id="edit-notify" class="box-content">
                         <h1><?= ($error !== false) ? $error : "Đăng ký tài khoản thành công" ?></h1>
-                        <a href="../index.php"style="text-decoration: none;">Quay lại tài khoản</a>
+                        <a href=".manage_accounts.php"style="text-decoration: none;">Quay lại tài khoản</a>
                     </div>
               <?php } ?>
             <?php }
@@ -131,8 +131,8 @@ and open the template in the editor.
                     </br>
                     <label style="font-size: 20px;">Phân quyền</label><br>
                         <select name="role" class="role-user">
-                            <option value="Staff">Staff</option>
-                            <option value="Admin">Admin</option>
+                            <option value="staff">Staff</option>
+                            <option value="admin">Admin</option>
                             
                             
                     </select><br>

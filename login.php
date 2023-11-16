@@ -101,8 +101,8 @@ and open the template in the editor.
                     <span class="an-hien-password" id="show-hide" onclick="showPassword()">🙈</span>
                     </div>
                     <input type="submit" value="Đăng nhập" style="text-decoration: none; background-color: green; color: white; padding: 8px; margin: 20px 6px; "> 
-                    <a href="./register.php" style="text-decoration: none;">Đăng ký</a><br><br>
-                    <a href="./index.php" style="text-decoration: none;">Quay lại</a>
+                    <a href="./register.php" style="text-decoration: none;">Đăng ký</a><br>
+                    <a href="./index.php" style="text-decoration: none;">Quay lại</a><br>
                 </form>
             </div>
         <?php } else {

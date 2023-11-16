@@ -62,7 +62,7 @@
                     <div class="row">
                             <div class="wap-items-ss brbox">
                                 <div class="wap-ss-img">
-                                <a href = "iphone.php"><img src = "images/iphone.png" alt =""></a>
+                                <a href = "detail.php?id=22"><img src = "images/iphone.png" alt =""></a>
 
                                 </div>
                             
@@ -85,7 +85,7 @@
                             <div class="row">
                                     <div class="wap-items-ss brbox">
                                         <div class="wap-ss-img">
-                                        <a href = ""><img src = "images/xiaomi.png" alt =""></a>
+                                        <a href = "detail.php?id=5"><img src = "images/xiaomi.png" alt =""></a>
                                         </div>
                                     
                                     </div>
@@ -110,7 +110,7 @@ $('.filtering').slick({
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay:true,
-  autoplayspeed:1100
+  autoplayspeed:500
 });
 
 var filtered = false;

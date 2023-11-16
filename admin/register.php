@@ -98,7 +98,7 @@ and open the template in the editor.
                     { ?> 
                     <div id="edit-notify" class="box-content">
                         <h1><?= ($error !== false) ? $error : "Đăng ký tài khoản thành công" ?></h1>
-                        <a href=".manage_accounts.php"style="text-decoration: none;">Quay lại tài khoản</a>
+                        <a href="./manage_accounts.php"style="text-decoration: none;">Quay lại tài khoản</a>
                     </div>
               <?php } ?>
             <?php }
@@ -106,7 +106,7 @@ and open the template in the editor.
             { ?>
                 <div id="edit-notify" class="box-content">
                     <h1>Vui lòng nhập đủ thông tin để đăng ký tài khoản</h1>
-                    <a href="./register.php" style="text-decoration: none;">Quay lại đăng ký</a>
+                    <a href="./manage_accounts.php" style="text-decoration: none;">Quay lại đăng ký</a>
                 </div>
                 <?php
             }
